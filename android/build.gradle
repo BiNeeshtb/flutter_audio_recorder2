@@ -26,7 +26,11 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.example.flutter_audio_recorder2'
-    compileSdkVersion 30
+    compileSdkVersion 34
+    
+    defaultConfig {
+        minSdk = 21    // ✅ 16 is too low; Flutter min is 21 now
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
