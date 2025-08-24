@@ -1,42 +1,35 @@
-group 'com.example.flutter_audio_recorder2'
-version '1.0-SNAPSHOT'
-
-buildscript {
-    ext.kotlin_version = '1.9.10' // ✅ Upgrade Kotlin
-    repositories {
-        google()
-        mavenCentral() // ✅ jcenter is deprecated
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2' // ✅ Upgrade AGP
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android' version '1.9.22'
 }
-
-rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
-    namespace "com.example.flutter_audio_recorder2" // ✅ Required for AGP 7.0+
-    compileSdkVersion 34 // ✅ Use latest
+    namespace "com.example.flutter_audio_recorder2" // ✅ This is now recognized
+    compileSdk = 34
 
     defaultConfig {
-        minSdkVersion 21 // ✅ 16 is too low for modern Flutter
+        minSdk = 21
     }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
 }
